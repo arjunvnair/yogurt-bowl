@@ -29,11 +29,11 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.spell.SpellingParser;
-
-import consoleio.C;
 
 public class Main
 {
@@ -60,7 +60,9 @@ public class Main
 		mainScreen.setLayout(new BorderLayout());
 		editorPane = new RSyntaxTextArea("announce \"Hello world!\"");
 		editorPane.setFont(new Font("Consolas", Font.PLAIN, 15));
-		editorPane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
+		atmf.putMapping("ParfAHighlighter", "ParfAHighlighter");
+		editorPane.setSyntaxEditingStyle("ParfAHighlighter");
 	    editorPane.setCodeFoldingEnabled(true);
 		try 
 		{
